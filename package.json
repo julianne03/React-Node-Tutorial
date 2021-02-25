@@ -1,0 +1,15 @@
+{
+  "name": "react-study",
+  "version": "1.0.0",
+  "description": "react and express study",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "seungmin-yi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
