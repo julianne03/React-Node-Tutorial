@@ -17,7 +17,7 @@ mongoose.connect('mongodb+srv://julianne:qawsedrftg@mongodbtest.0rhjr.mongodb.ne
 }).then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err))
 
-app.get('/', (req, res) => res.send('Hello World! 하이하이!'))
+app.get('/', (req, res) => res.send('Hello World! 새해 복 많이 받으세요!'))
 
 // register router
 app.post('/register', (req, res) => {
