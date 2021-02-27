@@ -81,6 +81,18 @@ app.get('/api/users/auth', auth, (req, res) => {
     })
 })
 
+// logout router
+app.get('/api/users/logout', auth, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id },
+        { token: "" }
+        , (err, user) => {
+            if(err) return res.json({ sucess:false, err });
+            return res.status(200).send({
+                suceess: true
+            })
+        })
+})
+
 
 
 // 앱이 실행되면 => 해라
