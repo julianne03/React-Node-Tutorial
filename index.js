@@ -5,7 +5,7 @@ const port = 5000
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const config = require('./config/key')
-
+const { auth } = require("./middlerware/auth")
 const { User } = require("./models/User")
 
 //application/x-www-form-urlendcoded
@@ -24,7 +24,7 @@ mongoose.connect(config.mongoURI, {
 app.get('/', (req, res) => res.send('Hello World! 새해 복 많이 받으세요!'))
 
 // register router
-app.post('/register', (req, res) => {
+app.post('/api/users/register', (req, res) => {
     // 회원가입 시 필요한 정보들을 client에서 가져오면 
     // 그 정보를 데이터베이스에 넣어주는 함수
     const user = new User(req.body)
@@ -38,7 +38,7 @@ app.post('/register', (req, res) => {
 })
 
 // login router
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
 
     // 1. 요청된 이메일을 데이터베이스에서 있는지 찾기
     User.findOne({ email: req.body.email }, (err, user) => {
@@ -66,6 +66,21 @@ app.post('/login', (req, res) => {
         })
     })
 })
+
+// auth router
+app.get('/api/users/auth', auth, (req, res) => {
+    // 여기는 미들웨어를 통과했다는 얘기는 Authentication이 True라는 말
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmin: req.user.role === 0 ? false : true,
+        isAuth: true,
+        email: req.user.email,
+        name: req.user.name,
+        role: req.user.role,
+        image: req.user.image
+    })
+})
+
 
 
 // 앱이 실행되면 => 해라
