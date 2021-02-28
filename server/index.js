@@ -23,6 +23,10 @@ mongoose.connect(config.mongoURI, {
 
 app.get('/', (req, res) => res.send('Hello World! 새해 복 많이 받으세요!'))
 
+app.get('/api/hello', (req, res) => {
+    res.send("hihi")
+})
+
 // register router
 app.post('/api/users/register', (req, res) => {
     // 회원가입 시 필요한 정보들을 client에서 가져오면 
